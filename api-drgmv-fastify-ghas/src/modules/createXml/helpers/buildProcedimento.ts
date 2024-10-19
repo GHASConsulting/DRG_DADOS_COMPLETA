@@ -26,6 +26,7 @@ export async function buildProcediemnto(
 
   procedimento.setDataExecucaoFinal(formatedDataExecucaoFinal)
 
+  const CD_PROC = procedimentoItens.CD_PROCEDIMENTO
   const CodigoCirurgia = procedimentoItens.CD_CIRURGIA_AVISO
   const dataMedicoProcedimento = await knex
     .select(
@@ -35,7 +36,7 @@ export async function buildProcediemnto(
     )
     .distinct('CD_CIRURGIA_AVISO')
     .from(TBL_PROCEDIMENTO)
-    .where({ CD_CIRURGIA_AVISO: CodigoCirurgia, CD_DTI_ATENDIMENTO })
+    .where({ CD_CIRURGIA_AVISO: CodigoCirurgia, CD_DTI_ATENDIMENTO, CD_PROCEDIMENTO: CD_PROC })
   for (const medicoProcedimentoItens of dataMedicoProcedimento) {
     const medicoProcedimento = new MedicoProcedimento()
     medicoProcedimento.setUf(medicoProcedimentoItens.UF_MEDICO_PROCEDIMENTO)

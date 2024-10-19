@@ -28,7 +28,17 @@ export async function createXmlParams(app: FastifyInstance) {
       console.log('NENHUM DADO ENCONTRADO.')
       return reply.send({ message: 'Nenhum dado encontrado' })
     }
-    await admission(dataAtendimentoFromDatabase)
+    let newParam :any = []
+
+    dataAtendimentoFromDatabase.forEach(item => {
+   
+      if(item?.CD_HOSPITAL != null){
+        newParam.push(item)
+      }
+    
+    })
+
+    await admission(newParam)
     return reply.send({ message: 'Envio realizado.' })
   })
 }

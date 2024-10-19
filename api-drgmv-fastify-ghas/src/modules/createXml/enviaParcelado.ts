@@ -18,7 +18,16 @@ export async function enviaPareclado() {
 
   let qtdSelecionada = dataAtendimentoFromDatabase.length
   if (qtdSelecionada <= 15) {
-    await admission(dataAtendimentoFromDatabase)
+      let newPa :any = []
+
+      dataAtendimentoFromDatabase.forEach(item => {
+  
+        if(item?.CD_HOSPITAL != null){
+          newPa.push(item)
+        }
+      
+        })
+    await admission(newPa)
   } else {
     while (qtdSelecionada > 0) {
       const dataAtendimentoFromDatabase = await knex
@@ -28,7 +37,17 @@ export async function enviaPareclado() {
         .orderBy('SITUACAO_INTERNACAO', 'ASC')
         .limit(15)
 
-      await admission(dataAtendimentoFromDatabase)
+        let newParam :any = []
+
+        dataAtendimentoFromDatabase.forEach(item => {
+     
+          if(item?.CD_HOSPITAL != null){
+            newParam.push(item)
+          }
+        
+          })
+  
+        await admission(newParam)
 
       qtdSelecionada -= dataAtendimentoFromDatabase.length
       console.log('FALTAM ' + qtdSelecionada + ' INTERNAÇOES')
