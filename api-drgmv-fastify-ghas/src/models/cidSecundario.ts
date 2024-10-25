@@ -1,4 +1,4 @@
-export class CodigoCidSecundario {
+export class CidSecundario {
   private codigoCidSecundario: string
 
   constructor() {
@@ -12,6 +12,6 @@ export class CodigoCidSecundario {
   public getData(): object {
     return {
       codigoCidSecundario: this.codigoCidSecundario,
-    }
-  }
+    }
+  }
 }
